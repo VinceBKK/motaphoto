@@ -8,3 +8,91 @@ Version: 1.0
 Tags: mota, photographe
 Text Domain: motaphoto
 */
+
+body {
+    font-family: 'space mono', sans-serif;
+}
+
+/*** Header ***/
+
+.site__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff; /* Couleur de fond du header */
+    height: 80px; /* Hauteur de votre header */
+    margin-left: 216px;
+  }
+  
+  .site__header a img {
+    max-height: 14px; /* ou la hauteur que vous souhaitez pour votre logo */
+    width: auto; /* cela gardera les proportions du logo */
+    max-width: 100%; /* empêche le logo de dépasser son conteneur */
+  }
+  
+  
+  .site__header__menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .site__header__menu li {
+    margin: 0 10px; /* Espace entre les liens */
+  }
+  
+  .site__header__menu li a {
+    text-decoration: none;
+    color: #000000; /* Couleur de vos liens */
+    font-size: 16px; /* Taille de police appropriée */
+  }
+  
+  /* Ajoutez des styles pour :hover et :focus si nécessaire */
+  .site__header__menu li a:hover,
+  .site__header__menu li a:focus {
+    color: #ff0000; /* Couleur au survol */
+  }
+  
+
+/*** Footer ***/
+
+.site__footer {
+    display: flex;
+    justify-content: center; /* Centre les éléments horizontalement */
+    max-width: 1440px; /* Limite la largeur du footer à 1440px */
+    margin: 0 auto; /* Ajoute une marge égale à gauche et à droite pour centrer le footer */
+    height: 40px;
+    border-top: 1px solid #000000; /* Ajoute une ligne en haut du footer */
+}
+
+.container {
+    display: flex; /* Utilise Flexbox pour aligner les éléments horizontalement */
+    align-items: center; /* Aligne les éléments verticalement au centre */
+    justify-content: center; /* Répartit les éléments avec un espace égal entre eux */
+    width: 620px;
+    margin: 0 auto; /* Centre le conteneur horizontalement */
+}
+
+.menu-bas-de-page-container ul {
+    display: flex; /* Ajoutez cette propriété */
+    align-items: center; /* Facultatif : aligne les éléments verticalement au centre */
+    padding: 0;
+}
+
+#menu-item-12 {
+    margin-right: 40px; /* Ajoute une marge à droite pour séparer les éléments */
+}
+
+.copyright-text {
+    margin-left: 40px; /* Ajoute une marge à gauche pour séparer les éléments */
+}
+
+.site__footer ul {
+    list-style: none; /* Supprime les puces des éléments de liste */
+    text-decoration: none;
+}
+
+.site__footer a {
+    text-decoration: none; /* Supprime le soulignement */
+}

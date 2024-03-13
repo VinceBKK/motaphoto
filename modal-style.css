@@ -1,0 +1,52 @@
+#contactModal {
+    display: none; /* La modale est cachée par défaut */
+    position: fixed; /* Position fixe par rapport à la fenêtre du navigateur */
+    left: 0;
+    top: 0;
+    width: 100%; /* Pleine largeur */
+    height: 100%; /* Pleine hauteur */
+    overflow: auto; /* Si le contenu est plus grand que la modale, cela permet de scroller */
+    background-color: rgb(0,0,0); /* Couleur de fond avec un peu de transparence */
+    background-color: rgba(0,0,0,0.4); /* Noir avec opacité */
+    z-index: 1000; /* S'assure que la modale est au-dessus des autres éléments */
+}
+
+/* Style du contenu de la modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% du haut et centré horizontalement */
+    border: 1px solid #888;
+    width: 597px; /* Largeur spécifiée */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001; /* S'assure que le contenu est au-dessus du fond de la modale */
+}
+
+.modal-header {
+    width: 100%; /* L'en-tête prend toute la largeur de la modale */
+    overflow: hidden; /* Empêche l'image de déborder */
+}
+
+.modal-header img {
+    width: 100%; /* L'image prend toute la largeur de la modale */
+    display: block; /* Évite les marges indésirables autour de l'image */
+    margin-top: 18px;
+}
+
+/* Le bouton pour fermer la modale */
+.close {
+    display: none;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
