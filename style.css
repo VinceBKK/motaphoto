@@ -172,11 +172,28 @@ body {
 }
 
 /* Styles pour les liens de navigation avec animation */
-.photo-navigation-links a {
-  text-decoration: none;
-  color: #000;
-  padding: 10px;
-  transition: color 0.3s ease; /* Animation sur la propriété color */
+/* Styles pour les liens de navigation (flèches) */
+.photo-navigation .nav-link {
+  text-decoration: none; /* Supprime le soulignement */
+  display: inline-block; /* Changez à block ou inline-block selon votre disposition */
+  width: 81px; /* Largeur souhaitée pour les flèches */
+  height: 25px; /* Hauteur souhaitée pour les flèches */
+  margin: 0 12.5px; /* Espace entre les flèches, ajustez selon besoin */
+  cursor: pointer; /* Change le curseur en main pour indiquer la cliquabilité */
+}
+
+/* Flèche précédente */
+.photo-navigation .prev-link::after {
+  content: '\2190'; /* Code Unicode pour la flèche gauche */
+  display: block; /* Ou inline-block selon votre disposition */
+  text-align: center; /* Centre le symbole de la flèche */
+}
+
+/* Flèche suivante */
+.photo-navigation .next-link::after {
+  content: '\2192'; /* Code Unicode pour la flèche droite */
+  display: block; /* Ou inline-block selon votre disposition */
+  text-align: center; /* Centre le symbole de la flèche */
 }
 
 .photo-navigation-links a:hover,

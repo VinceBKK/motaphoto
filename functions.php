@@ -70,11 +70,22 @@ function motaphoto_post_navigation() {
 
     if ( !empty( $prev_post ) ) {
         $prev_thumbnail_url = get_content_first_image_url( $prev_post->ID );
-        echo '<a href="' . esc_url( get_permalink( $prev_post->ID ) ) . '" class="nav-link prev-link" data-thumb="' . $prev_thumbnail_url . '">← Précédente</a>';
+        echo '<a href="' . esc_url( get_permalink( $prev_post->ID ) ) . '" class="nav-link prev-link" data-thumb="' . $prev_thumbnail_url . '" aria-label="Post précédent"></a>';
     }
 
     if ( !empty( $next_post ) ) {
         $next_thumbnail_url = get_content_first_image_url( $next_post->ID );
-        echo '<a href="' . esc_url( get_permalink( $next_post->ID ) ) . '" class="nav-link next-link" data-thumb="' . $next_thumbnail_url . '">Suivante →</a>';
+        echo '<a href="' . esc_url( get_permalink( $next_post->ID ) ) . '" class="nav-link next-link" data-thumb="' . $next_thumbnail_url . '" aria-label="Post suivant"></a>';
     }
 }
+
+function motaphoto_enqueue_styles() {
+    // Enregistrement et enfilement de la feuille de style principale
+    wp_enqueue_style('motaphoto-main-style', get_stylesheet_uri());
+    
+    // Enregistrement et enfilement de la feuille de style de la modale
+    wp_enqueue_style('modal-style', get_template_directory_uri() . '/modal-style.css', array(), '1.0', 'all');
+
+
+}
+add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
