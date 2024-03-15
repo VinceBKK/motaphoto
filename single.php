@@ -32,17 +32,6 @@ while ( have_posts() ) :
 		comments_template();
 	}
 
-	// Previous/next post navigation.
-$twentytwentyone_next_label = esc_html__( 'Next post →', 'motaphoto' );
-$twentytwentyone_previous_label = esc_html__( '← Previous post', 'motaphoto' );
-
-the_post_navigation(
-    array(
-        'next_text' => '<p class="meta-nav">' . $twentytwentyone_next_label . '</p><p class="post-title">%title</p>',
-        'prev_text' => '<p class="meta-nav">' . $twentytwentyone_previous_label . '</p><p class="post-title">%title</p>',
-    )
-);
-
 endwhile; // End of the loop.
 
 get_footer();

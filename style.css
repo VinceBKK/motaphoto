@@ -96,3 +96,119 @@ body {
 .site__footer a {
     text-decoration: none; /* Supprime le soulignement */
 }
+
+/*** Post Photo ***/
+
+/* Conteneur principal pour tout le contenu du post */
+.photo-single-layout {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+  min-height: calc(100vh - 118px); /* Hauteur de la vue moins le bloc d'interaction */
+}
+
+/* Conteneur pour les métadonnées et l'image */
+.photo-content {
+  display: flex;
+  width: 100%; /* Prend toute la largeur */
+}
+
+/* Conteneur pour les métadonnées */
+.photo-info-container {
+  width: 50%; /* Prend 50% de la largeur */
+  padding: 20px; /* Ajustez selon votre design */
+}
+
+/* Conteneur pour l'image */
+.photo-image-container {
+  width: 50%; /* Prend 50% de la largeur */
+}
+
+/* Conteneur pour les interactions */
+
+.interaction-left {
+  display: flex;
+}
+
+.photo-interaction-container {
+  width: 100%; /* Prend toute la largeur */
+  height: 118px; /* Hauteur fixe pour le bloc d'interaction */
+  display: flex;
+  justify-content: space-between; /* Répartit le contenu sur les côtés */
+  align-items: center; /* Centre les éléments verticalement */
+  padding: 0 20px; /* Ajustez selon votre design */
+}
+
+/* Styles pour l'image à l'intérieur de .entry-content */
+.photo-thumbnail-container img {
+  width: 100%; /* Assure que l'image remplit le conteneur */
+  height: auto; /* Maintient l'aspect ratio de l'image */
+  object-fit: cover; /* Ajuste l'image pour couvrir l'espace disponible */
+}
+
+
+/* Styles supplémentaires pour le bouton "Contact" */
+.contact-button {
+  background-color: #4E5260; /* Remplacez par la couleur de fond de votre choix */
+  color: #FFFFFF; /* Remplacez par la couleur de texte de votre choix */
+  border: none;
+  padding: 10px 20px;
+  margin-left: 438px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transition douce pour le changement de fond */
+  font-size: 1rem; /* Ajustez la taille de la police si nécessaire */
+  border-radius: 2px; /* Ajustez le rayon de la bordure pour les coins arrondis si nécessaire */
+  outline: none; /* Supprime le contour lors de la mise au point */
+  text-transform: uppercase; /* Optionnel: transforme le texte en majuscules */
+}
+
+.contact-button:hover {
+  background-color: #6C757D; /* Remplacez par la couleur de fond au survol */
+}
+
+/* Style pour le texte "Cette photo vous intéresse ?" si vous décidez de le garder */
+.interest-text {
+    margin-right: auto; /* Pour pousser le bouton "Contact" vers la droite */
+    /* Ajoutez d'autres propriétés de style comme la couleur de texte, la police, etc. */
+}
+
+/* Styles pour les liens de navigation avec animation */
+.photo-navigation-links a {
+  text-decoration: none;
+  color: #000;
+  padding: 10px;
+  transition: color 0.3s ease; /* Animation sur la propriété color */
+}
+
+.photo-navigation-links a:hover,
+.photo-navigation-links a:focus { /* Styles pour le survol et la mise au point */
+  color: #ff0000; /* Changement de couleur au survol */
+  transition: color 0.3s ease; /* Confirmation que l'animation s'applique également au survol */
+}
+
+/* Styles pour la miniature au survol avec animation */
+
+.photo-navigation {
+  position: relative;
+}
+.nav-thumb {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  opacity: 0; /* Commence avec une opacité de 0 pour une animation en fondu */
+  transition: opacity 0.3s ease; /* Animation sur la propriété opacity */
+  z-index: 10;
+  max-width: 81px; /* Limite la largeur maximale de la miniature */
+  max-height: 71px; /* Limite la hauteur maximale de la miniature */
+  object-fit: cover; /* Assure que l'image couvre l'espace disponible sans perdre ses proportions */
+}
+
+.photo-navigation-links a:hover .nav-thumb,
+.photo-navigation-links a:focus .nav-thumb {
+  display: block;
+  opacity: 1; /* Animation en fondu vers une opacité de 1 */
+}

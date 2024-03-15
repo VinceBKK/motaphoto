@@ -47,3 +47,34 @@ function motaphoto_entry_meta_footer() {
     // Affiche un lien d'édition pour les utilisateurs autorisés
     edit_post_link( __( 'Edit', 'motaphoto' ), '<span class="edit-link">', '</span>' );
 }
+
+// Suppression de la navigation par défaut dans les posts single
+function remove_default_post_navigation() {
+    remove_action( 'the_post_navigation', 'twenty_twenty_one_the_post_navigation' );
+}
+add_action( 'after_setup_theme', 'remove_default_post_navigation' );
+
+// Ajout de vos propres actions pour la navigation personnalisée
+function get_content_first_image_url($postID) {
+    $post = get_post($postID);
+    preg_match_all('/<img .*src=["\']([^"\']+)/i', $post->post_content, $matches);
+    if (isset($matches[1][0])) {
+        return $matches[1][0];
+    }
+    return ''; // Retourne une chaîne vide si pas d'image
+}
+
+function motaphoto_post_navigation() {
+    $prev_post = get_previous_post();
+    $next_post = get_next_post();
+
+    if ( !empty( $prev_post ) ) {
+        $prev_thumbnail_url = get_content_first_image_url( $prev_post->ID );
+        echo '<a href="' . esc_url( get_permalink( $prev_post->ID ) ) . '" class="nav-link prev-link" data-thumb="' . $prev_thumbnail_url . '">← Précédente</a>';
+    }
+
+    if ( !empty( $next_post ) ) {
+        $next_thumbnail_url = get_content_first_image_url( $next_post->ID );
+        echo '<a href="' . esc_url( get_permalink( $next_post->ID ) ) . '" class="nav-link next-link" data-thumb="' . $next_thumbnail_url . '">Suivante →</a>';
+    }
+}

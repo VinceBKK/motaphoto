@@ -8,28 +8,64 @@
  * @subpackage Twenty_Twenty_One
  * @since Twenty Twenty-One 1.0
  */
-
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('photo-single-layout'); ?>>
 
-    <header class="entry-header alignwide">
-        <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-        <?php if ( has_post_thumbnail() ) { the_post_thumbnail(); } ?>
-    </header><!-- .entry-header -->
+<!-- Conteneur pour métadonnées et image -->
 
-    <div class="entry-content">
+<div class="photo-content">
+
+    <div class="photo-info-container">
+        <header class="entry-header">
+            <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
+
+            <div class="photo-meta">
+                <div class="post-reference">RÉFÉRENCE : <?php the_field('reference'); ?></div>
+                <div class="post-categories">CATÉGORIE : 
+                    <?php 
+                    $categories = wp_get_post_terms( get_the_ID(), 'categorie', array('fields' => 'names') );
+                    echo !empty($categories) ? esc_html(implode(', ', $categories)) : '';
+                    ?>
+                </div>
+                <div class="post-formats">FORMAT : 
+                    <?php 
+                    $formats = wp_get_post_terms( get_the_ID(), 'format', array('fields' => 'names') );
+                    echo !empty($formats) ? esc_html(implode(', ', $formats)) : '';
+                    ?>
+                </div>
+                <div class="post-type">TYPE : <?php the_field('type'); ?></div>
+                <div class="post-year">ANNÉE : <?php echo get_the_date( 'Y' ); ?></div>
+            </div>
+        </header>
+    </div>
+
+	<div class="entry-content">
         <?php the_content(); ?>
-    </div><!-- .entry-content -->
+    </div>
 
-    <footer class="entry-footer default-max-width">
-        <div class="photo-meta">
-            <div class="post-year">Année de publication: <?php echo get_the_date( 'Y' ); ?></div>
-            <div class="post-type">Type: <?php the_field('type'); ?></div>
-            <div class="post-reference">Référence: <?php the_field('reference'); ?></div>
-            <div class="post-categories">Catégories: <?php echo get_the_term_list( get_the_ID(), 'categorie', '', ', ' ); ?></div>
-            <div class="post-formats">Formats: <?php echo get_the_term_list( get_the_ID(), 'format', '', ', ' ); ?></div>
+    <?php if ( has_post_thumbnail() ) : ?>
+        <div class="photo-image-container">
+            <div class="photo-thumbnail-container">
+                <?php the_post_thumbnail('full', ['class' => 'photo-thumbnail']); ?>
+            </div>
         </div>
-    </footer><!-- .entry-footer -->
+    <?php endif; ?>
+
+	</div> <!-- Fin du conteneur pour métadonnées et image -->
+
+	<!-- Début du nouveau bloc pour les interactions -->
+<div class="photo-interaction-container">
+    <div class="interaction-left">
+        <p class="interest-text">Cette photo vous intéresse ?</p>
+        <button id="openContactModal" class="contact-button">Contact</button>
+    </div>
+
+    <div class="photo-navigation">
+        <!-- Appel de la fonction de navigation personnalisée -->
+        <?php motaphoto_post_navigation(); ?>
+    </div>
+</div>
+<!-- Fin du nouveau bloc pour les interactions -->
 
 </article><!-- #post-<?php the_ID(); ?> -->
