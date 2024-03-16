@@ -11,6 +11,7 @@ Text Domain: motaphoto
 
 body {
     font-family: 'space mono', sans-serif;
+    margin: 0;
 }
 
 /*** Header ***/
@@ -21,6 +22,12 @@ body {
     align-items: center;
     background-color: #ffffff; /* Couleur de fond du header */
     height: 80px; /* Hauteur de votre header */
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .site__header a {
     margin-left: 216px;
   }
   
@@ -110,13 +117,28 @@ body {
 .photo-content {
   display: flex;
   width: 100%; /* Prend toute la largeur */
+  height: 843px;
+  margin-top: 40px;
 }
 
-/* Conteneur pour les métadonnées */
+/* Conteneur pour les métadonnées et le titre */
 .photo-info-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 144px;
+  margin-top: 525px;
   width: 50%; /* Prend 50% de la largeur */
   padding: 20px; /* Ajustez selon votre design */
 }
+
+.photo-info-container .entry-title {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 66px;
+  line-height: 70px;
+  margin: 0;
+}
+
 
 /* Conteneur pour l'image */
 .photo-image-container {
@@ -229,3 +251,70 @@ body {
   display: block;
   opacity: 1; /* Animation en fondu vers une opacité de 1 */
 }
+
+/* Photos apparentées */
+
+/* Conteneur général des photos apparentées */
+.related-photos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Espacement entre les photos */
+  margin-top: 20px;
+}
+
+/* Bloc individuel de photo */
+.photo-block {
+  position: relative;
+  width: 564px; /* Ou ajustez selon votre mise en page */
+  height: 495px;
+  overflow: hidden; /* Cache les débordements */
+  margin-bottom: 20px; /* Espacement entre les blocs */
+}
+
+.photo-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assure que les images couvrent l'espace disponible */
+}
+
+/* Superposition et icônes */
+.photo-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent noir */
+  opacity: 0; /* Cache initialement la superposition */
+  transition: opacity 0.3s ease; /* Animation en fondu */
+}
+
+.overlay-info {
+  color: white;
+}
+
+.photo-block:hover .photo-overlay {
+  opacity: 1; /* Montre la superposition au survol */
+}
+
+.photo-info-icon,
+.photo-fullscreen-icon {
+  color: #fff; /* Couleur des icônes */
+  margin: 0 10px; /* Espacement entre les icônes */
+  font-size: 24px; /* Taille des icônes */
+  text-decoration: none; /* Supprime le soulignement */
+}
+
+/* Styles supplémentaires pour l'icône œil */
+.photo-info-icon {
+  /* Styles spécifiques à l'icône œil si nécessaire */
+}
+
+/* Styles supplémentaires pour l'icône plein écran */
+.photo-fullscreen-icon {
+  /* Styles spécifiques à l'icône plein écran si nécessaire */
+}
+

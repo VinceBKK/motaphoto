@@ -68,4 +68,55 @@
 </div>
 <!-- Fin du nouveau bloc pour les interactions -->
 
+<!-- Conteneur pour photos apparentées -->
+
+<div class="related-photos">
+    <h2>VOUS AIMEREZ AUSSI</h2>
+    <?php
+// WP_Query pour récupérer des photos apparentées
+$related_category = wp_get_post_terms($post->ID, 'categorie', array('fields' => 'ids'));
+$args = array(
+    'post_type' => 'photo', // Remplacez par le bon type de post si nécessaire
+    'posts_per_page' => 2,
+    'post__not_in' => array($post->ID),
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'categorie',
+            'field' => 'term_id',
+            'terms' => $related_category,
+        ),
+    ),
+);
+
+$related_posts = new WP_Query($args);
+
+if($related_posts->have_posts()) :
+    while($related_posts->have_posts()) : $related_posts->the_post();
+        $photo_url = get_content_first_image_url(get_the_ID());
+        $photo_alt = get_the_title();
+        $photo_info_link = get_permalink();
+        // Utilisation du champ ACF 'reference'
+        $photo_reference = get_field('reference', get_the_ID());
+        
+        // Récupérer les noms des catégories
+        $terms = wp_get_post_terms(get_the_ID(), 'categorie', array("fields" => "names"));
+        $photo_category = !empty($terms) ? implode(', ', $terms) : '';
+
+        $photo_fullscreen_link = $photo_url;
+        
+        get_template_part('template-parts/photo_block', null, array(
+            'photo_url' => $photo_url,
+            'photo_alt' => $photo_alt,
+            'photo_info_link' => $photo_info_link,
+            'photo_fullscreen_link' => $photo_fullscreen_link,
+            'photo_reference' => $photo_reference,
+            'photo_category' => $photo_category
+        ));
+    endwhile;
+    wp_reset_postdata();
+endif;
+
+?>
+</div>
+
 </article><!-- #post-<?php the_ID(); ?> -->
