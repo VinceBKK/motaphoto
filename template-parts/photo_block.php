@@ -10,9 +10,9 @@ $photo_category = $args['photo_category']; // Nouveau
 <div class="photo-block">
     <img src="<?php echo esc_url($photo_url); ?>" alt="<?php echo esc_attr($photo_alt); ?>" width="564" height="495">
     <div class="photo-overlay">
-        <div class="overlay-info"> <!-- Nouveau bloc pour afficher les informations -->
-            <span class="photo-category"><?php echo $photo_category; ?></span>
+        <div class="overlay-info"> <!-- Nouveau bloc pour afficher les informations -->  
             <span class="photo-reference"><?php echo $photo_reference; ?></span>
+            <span class="photo-category"><?php echo $photo_category; ?></span>
         </div>
         <a href="<?php echo esc_url($photo_info_link); ?>" class="photo-info-icon">
         <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_eye.png" alt="Voir les infos de la photo" />

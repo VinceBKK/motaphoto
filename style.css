@@ -128,6 +128,13 @@ body {
     color: transparent;
 }
 
+/*** Catalogue page accueil ***/
+
+.photo-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /*** Post Photo ***/
 
 /* Conteneur principal pour tout le contenu du post */
