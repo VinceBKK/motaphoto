@@ -53,6 +53,7 @@ body {
     text-decoration: none;
     color: #000000; /* Couleur de vos liens */
     font-size: 16px; /* Taille de police appropriée */
+    font-weight: 400;
   }
   
   /* Ajoutez des styles pour :hover et :focus si nécessaire */
@@ -104,6 +105,29 @@ body {
     text-decoration: none; /* Supprime le soulignement */
 }
 
+/*** Hero ***/
+
+.hero {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 96px;
+    font-weight: 700;
+    font-style: italic;
+    white-space: nowrap;
+    word-spacing: 40px;
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+}
+
 /*** Post Photo ***/
 
 /* Conteneur principal pour tout le contenu du post */
@@ -126,19 +150,38 @@ body {
   display: flex;
   flex-direction: column;
   margin-left: 144px;
-  margin-top: 525px;
+  margin-top: 413px;
   width: 50%; /* Prend 50% de la largeur */
-  padding: 20px; /* Ajustez selon votre design */
+}
+
+.photo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+}
+
+.entry-header {
+  border-bottom: 1px solid;
+  margin-right: 10px;
 }
 
 .photo-info-container .entry-title {
+  width: 420px;
   font-style: italic;
   font-weight: 400;
   font-size: 66px;
   line-height: 70px;
   margin: 0;
+  margin-bottom: 20px;
 }
 
+.post-year {
+  margin-bottom: 20px;
+}
 
 /* Conteneur pour l'image */
 .photo-image-container {

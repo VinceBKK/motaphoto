@@ -89,3 +89,20 @@ function motaphoto_enqueue_styles() {
 
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
+
+function motaphoto_get_random_image_url() {
+    $args = array(
+        'post_type'      => 'attachment',
+        'post_mime_type' => 'image',
+        'post_status'    => 'inherit',
+        'posts_per_page' => -1, // Sélectionner toutes les images
+    );
+
+    $images = get_posts($args);
+    if (!empty($images)) {
+        $random_image = $images[array_rand($images)]; // Sélectionner une image aléatoirement
+        return wp_get_attachment_url($random_image->ID);
+    }
+
+    return ''; // Retourner une chaîne vide si aucune image n'est trouvée
+}
