@@ -106,3 +106,96 @@ function motaphoto_get_random_image_url() {
 
     return ''; // Retourner une chaîne vide si aucune image n'est trouvée
 }
+
+// Bouton charger plus
+
+function motaphoto_scripts() {
+    wp_enqueue_script('motaphoto-ajax', get_template_directory_uri() . '/motaphoto-ajax.js', array('jquery'), null, true);
+    
+    // Calculer le nombre total de pages
+    $total_posts = wp_count_posts('photo')->publish;
+    $max_num_pages = ceil($total_posts / 8); // Remplacer '8' par la valeur de posts_per_page si différent
+
+    // Passer l'URL d'AJAX à motaphoto-ajax.js
+    wp_localize_script('motaphoto-ajax', 'motaphoto_ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('load_more_posts'),
+        'max_pages' => $max_num_pages, // Ajouter cette ligne
+    ));
+}
+
+add_action('wp_enqueue_scripts', 'motaphoto_scripts');
+
+// Gérer l'appel AJAX
+add_action('wp_ajax_nopriv_load_more', 'motaphoto_load_more');
+add_action('wp_ajax_load_more', 'motaphoto_load_more');
+
+function motaphoto_load_more() {
+    error_log('Valeur de page reçue: ' . print_r($_POST['page'], true));
+    // error_log('AJAX Load More called');
+    check_ajax_referer('load_more_posts', 'nonce');
+
+    $total_posts = wp_count_posts('photo')->publish; // Nombre total de posts publiés de type 'photo'
+    $posts_per_page = 8; // Le nombre de posts que tu veux afficher par page
+    $max_num_pages = ceil($total_posts / $posts_per_page); // Calcul du nombre maximal de pages
+    
+    $paged = $_POST['page'] + 1;
+    if($paged > $max_num_pages) {
+        $paged = $max_num_pages; // S'assure que paged ne dépasse pas le nombre de pages disponible
+    }
+    error_log('Page actuelle après ajustement: ' . $paged);
+    
+    
+    
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'paged' => $paged,
+        'meta_key' => 'reference',
+        'orderby' => 'meta_value',
+        'order' => 'ASC',
+    );
+
+    // Vérifie que les posts avec le custom post type 'photo' existent bien.
+    error_log('Arguments WP_Query: ' . print_r($args, true));
+
+    $query = new WP_Query($args);
+    error_log('Nombre de posts trouvés: ' . $query->found_posts);
+    if ($query->have_posts()):
+        while ($query->have_posts()): $query->the_post();
+        // Affiche un simple message pour chaque post
+        // echo '<div>' . get_the_title() . '</div>';
+    // Définition des variables à passer
+    $photo_url = get_content_first_image_url(get_the_ID()); // Assure-toi que cette fonction fonctionne comme prévu
+    $photo_alt = get_the_title();
+    $photo_info_link = get_permalink();
+    $photo_fullscreen_link = ''; // Ajuste selon ton implémentation
+    $photo_reference = get_field('reference'); // Assure-toi d'avoir ACF activé et le champ configuré
+    $categories = wp_get_post_terms(get_the_ID(), 'categorie', array("fields" => "names"));
+    $photo_category = !empty($categories) ? implode(', ', $categories) : '';
+
+    // Ajouter des lignes de débogage
+    // error_log('Photo URL: ' . $photo_url);
+    // error_log('Référence de la photo : ' . $photo_reference);
+    // error_log('Catégorie(s) de la photo : ' . $photo_category);
+
+    // Inclure le template en passant les variables
+    get_template_part('template-parts/photo_block', null, array(
+        'photo_url' => $photo_url,
+        'photo_alt' => $photo_alt,
+        'photo_info_link' => $photo_info_link,
+        'photo_fullscreen_link' => $photo_fullscreen_link,
+        'photo_reference' => $photo_reference,
+        'photo_category' => $photo_category,
+    ));
+    endwhile;
+
+    endif;
+    // echo 'Ceci est un test pour voir si cette réponse atteint le JavaScript.';
+
+    if($paged >= $max_num_pages) {
+        // echo 'no more posts';
+    }
+
+    wp_die(); // Termine la requête AJAX proprement
+}

@@ -1,4 +1,6 @@
 <?php
+// error_log('Le fichier photo_block.php est exécuté.');
+// echo 'Le fichier photo_block.php est exécuté.';
 // Accès aux variables passées à get_template_part
 $photo_url = $args['photo_url'];
 $photo_alt = $args['photo_alt'];

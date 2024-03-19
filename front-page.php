@@ -45,7 +45,11 @@ get_header(); ?>
         endif;
         ?>
     </div>
+        <div id="load_more_container">
+        <button id="load_more">Charger plus</button>
 </div>
+
+    </div>
 </main>
 
 <?php
