@@ -8,7 +8,40 @@ get_header(); ?>
 </section>
 
 <main>
-    <!-- Conteneur pour le catalogue de photos -->
+
+<!-- Filtres -->
+
+<?php
+// Affichage taxonomies
+$taxonomy = [
+    'categorie' => 'CATÉGORIES',
+    'format' => 'FORMATS',
+];
+
+foreach ($taxonomy as $taxonomy_slug => $label) {
+    $terms = get_terms($taxonomy_slug);
+    if ($terms && !is_wp_error($terms)) {
+
+        echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
+
+        echo "<option value=''>$label</option>";
+        foreach ($terms as $term) {
+            echo "<option value='$term->slug'>$term->name</option>";
+        }
+        echo "</select>";
+    }
+}
+?>
+
+<select id="order" class="custom-select taxonomy-select">
+    <option value="">Trier par</option>
+    <option value="DESC">Plus récentes</option>
+    <option value="ASC">Plus anciennes</option>
+</select>
+
+
+
+<!-- Conteneur pour le catalogue de photos -->
     <div class="catalogue-section">
     <div class="photo-grid">
         <?php

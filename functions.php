@@ -107,6 +107,146 @@ function motaphoto_get_random_image_url() {
     return ''; // Retourner une chaîne vide si aucune image n'est trouvée
 }
 
+// Filtres
+
+function motaphoto_enqueue_scripts() {
+    wp_enqueue_script('motaphoto-ajax-filter', get_template_directory_uri() . '/motaphoto-ajax.js', array('jquery'), null, true);
+    wp_localize_script('motaphoto-ajax-filter', 'motaphoto_ajax_params', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+    ));
+}
+add_action('wp_enqueue_scripts', 'motaphoto_enqueue_scripts');
+
+// Ajoutez votre nouvelle fonction ici
+function load_initial_photos_function() {
+    check_ajax_referer('load_more_posts', 'nonce');
+
+    // Ajout pour gérer la pagination
+    $paged = isset($_POST['page']) ? absint($_POST['page']) : 1;
+
+    // Arguments pour WP_Query pour charger les photos initiales
+
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => 8,
+        'paged' => $paged,
+        'meta_key' => 'reference',
+        'orderby' => 'meta_value',
+        'order' => 'ASC',
+    );
+
+    $query = new WP_Query($args);
+    if ($query->have_posts()) {
+        while ($query->have_posts()) {
+            $query->the_post();
+
+            // Réutilisez la logique pour extraire l'URL de l'image du contenu
+            $content = get_the_content();
+            preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $image);
+            $image_url = $image['src'] ?? ''; // S'assure d'utiliser l'opérateur de coalescence nulle
+
+            // Les autres détails comme avant
+            $args = array(
+                'photo_url' => $image_url,
+                'photo_alt' => get_the_title(),
+                'photo_info_link' => get_the_permalink(),
+                'photo_fullscreen_link' => $image_url,
+                'photo_reference' => get_field('reference'),
+            );
+
+            // Ajoutez la catégorie au tableau $args si nécessaire
+            $terms = get_the_terms(get_the_ID(), 'categorie');
+            $photo_category = !empty($terms) ? esc_html($terms[0]->name) : '';
+            $args['photo_category'] = $photo_category;
+
+            // Passer le tableau $args à get_template_part
+            get_template_part('template-parts/photo_block', null, $args);
+        }
+    } else {
+        echo '<p class="critereFiltrage">Aucune photo ne correspond aux critères de filtrage.</p>';
+    }
+    
+    wp_reset_postdata();
+    wp_die();
+}
+
+
+// Et les hooks associés à la fin du fichier
+add_action('wp_ajax_load_initial_photos', 'load_initial_photos_function');
+add_action('wp_ajax_nopriv_load_initial_photos', 'load_initial_photos_function');
+
+function filter_photos_function(){
+
+    $filter = $_POST['filter'];
+    $args = array(
+        'post_type' => 'photo',
+        'posts_per_page' => -1,
+        'tax_query' => array(
+            'relation' => 'AND',
+        )
+    );
+    // Ajoute chaque filtre a la tax query si elle est definie
+    if(!empty($filter['categorie'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'categorie',
+            'field'    => 'slug',
+            'terms'    => $filter['categorie'],
+        );
+    }
+    if(!empty($filter['format'])){
+        $args['tax_query'][] = array(
+            'taxonomy' => 'format',
+            'field'    => 'slug',
+            'terms'    => $filter['format'],
+        );
+    }
+
+    // Vérifiez si un ordre de tri a été passé et mettez à jour les arguments de requête
+if (!empty($filter['order']) && in_array($filter['order'], array('ASC', 'DESC'))) {
+    $args['order'] = $filter['order'];
+    // Lorsque vous triez par date, utilisez 'date' pour l'orderby
+    $args['orderby'] = 'date';
+}
+
+    
+    $query = new WP_Query($args);
+    if($query->have_posts()){
+        while($query->have_posts()){
+            $query->the_post();
+
+            // Extrait l'URL de l'image du contenu du post
+            $content = get_the_content();
+            preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $content, $image);
+            $image_url = $image['src'] ?? ''; // Utilise l'opérateur de coalescence nulle si aucune image n'est trouvée.
+
+            // Préparation des données à passer à photo_block.php
+$args = array(
+    'photo_url' => $image_url,
+    'photo_alt' => get_the_title(), // Utilisez get_the_title pour le texte alternatif ou une autre source
+    'photo_info_link' => get_the_permalink(),
+    'photo_fullscreen_link' => $image_url, // Si vous voulez utiliser la même URL pour le plein écran
+    'photo_reference' => get_field('reference'), // Récupère la référence via ACF
+);
+
+// Obtention des termes de la catégorie
+$terms = get_the_terms(get_the_ID(), 'categorie');
+$photo_category = !empty($terms) ? esc_html($terms[0]->name) : '';
+
+// Ajoutez la catégorie au tableau $args si nécessaire
+$args['photo_category'] = $photo_category;
+
+            // Passer le tableau $args à get_template_part
+            get_template_part('template-parts/photo_block', null, $args);
+        }
+        wp_reset_postdata();
+    } else {
+        echo '<p class="critereFiltrage">Aucune photo ne correspond aux criteres de filtrage</p>';
+    }
+    die();
+}
+add_action('wp_ajax_filter_photos', 'filter_photos_function');
+add_action('wp_ajax_nopriv_filter_photos', 'filter_photos_function');
+
 // Bouton charger plus
 
 function motaphoto_scripts() {
