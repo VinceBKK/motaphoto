@@ -59,7 +59,7 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
                 $photo_url = get_content_first_image_url(get_the_ID()); // Assurez-vous que cette fonction retourne correctement l'URL
                 $photo_alt = get_the_title();
                 $photo_info_link = get_permalink();
-                $photo_fullscreen_link = ''; // Définissez ceci selon votre implémentation de lightbox
+                $photo_fullscreen_link = $photo_url;
                 $photo_reference = get_field('reference'); // Utilisez ACF pour obtenir la référence
                 $categories = wp_get_post_terms(get_the_ID(), 'categorie', array("fields" => "names"));
                 $photo_category = !empty($categories) ? implode(', ', $categories) : '';

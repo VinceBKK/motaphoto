@@ -114,7 +114,9 @@ function motaphoto_enqueue_scripts() {
     wp_localize_script('motaphoto-ajax-filter', 'motaphoto_ajax_params', array(
         'ajax_url' => admin_url('admin-ajax.php'),
     ));
+    
 }
+
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_scripts');
 
 // Ajoutez votre nouvelle fonction ici
@@ -309,7 +311,7 @@ function motaphoto_load_more() {
     $photo_url = get_content_first_image_url(get_the_ID()); // Assure-toi que cette fonction fonctionne comme prévu
     $photo_alt = get_the_title();
     $photo_info_link = get_permalink();
-    $photo_fullscreen_link = ''; // Ajuste selon ton implémentation
+    $photo_fullscreen_link = $photo_url; // Ajuste selon ton implémentation
     $photo_reference = get_field('reference'); // Assure-toi d'avoir ACF activé et le champ configuré
     $categories = wp_get_post_terms(get_the_ID(), 'categorie', array("fields" => "names"));
     $photo_category = !empty($categories) ? implode(', ', $categories) : '';
@@ -339,3 +341,8 @@ function motaphoto_load_more() {
 
     wp_die(); // Termine la requête AJAX proprement
 }
+
+function motaphoto_enqueue_lightbox_scripts() {
+    wp_enqueue_script('motaphoto-lightbox', get_template_directory_uri() . '/motaphoto-lightbox.js', array('jquery'), '1.0.0', true);
+}
+add_action('wp_enqueue_scripts', 'motaphoto_enqueue_lightbox_scripts');

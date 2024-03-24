@@ -16,12 +16,13 @@ $photo_category = $args['photo_category']; // Nouveau
             <span class="photo-reference"><?php echo $photo_reference; ?></span>
             <span class="photo-category"><?php echo $photo_category; ?></span>
         </div>
-        <a href="<?php echo esc_url($photo_info_link); ?>" class="photo-info-icon">
+    <a href="<?php echo esc_url($photo_info_link); ?>" class="photo-info-icon">
         <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_eye.png" alt="Voir les infos de la photo" />
     </a>
-    <a href="<?php echo esc_url($photo_fullscreen_link); ?>" class="photo-fullscreen-icon">
-        <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png" alt="Voir en plein écran" />
+    <a href="<?php echo esc_url($photo_fullscreen_link); ?>" class="photo-fullscreen-link" data-lightbox="true" data-category="<?php echo esc_attr($photo_category); ?>" data-reference="<?php echo esc_attr($photo_reference); ?>">
+    <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png" alt="Voir en plein écran" />
     </a>
+
     </div>
 </div>
 
