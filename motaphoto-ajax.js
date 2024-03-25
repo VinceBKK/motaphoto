@@ -22,7 +22,24 @@ jQuery(document).ready(function($) {
                 filter: filterData
             },
             success: function(result) {
+            // Créez un nouveau tableau avec les nouveaux liens d'images filtrées
+            const newLinks = $(result).find('a[data-lightbox="true"]');
+            const newImages = newLinks.map(function() {
+            return {
+            url: $(this).attr('href'),
+            alt: $(this).find('img').attr('alt'),
+            category: $(this).data('category'),
+            reference: $(this).data('reference'),
+            filter: $(this).data('filter')
+            };
+  }).get();
+
+  // Mettez à jour le contenu de .photo-grid
+                
                 $('.photo-grid').html(result);
+
+                // Mettez à jour les images de la lightbox avec les nouvelles images filtrées
+                updateLightboxImages(newImages);
 
                 if(areFiltersDefault()) {
                     // Assurez-vous que le bouton "Charger plus" est visible si les filtres sont réinitialisés
@@ -33,7 +50,13 @@ jQuery(document).ready(function($) {
 
                 // Réinitialiser la page à 1 si les filtres sont enlevés ou ajustés
                 page = 1;
-            }
+            
+                // Mise à jour de la Lightbox avec les nouveaux éléments après filtrage
+                if(window.updateLightboxImagesWithFilteredResults) {
+                    window.updateLightboxImagesWithFilteredResults();
+                }
+            
+        }
         });
     }
 

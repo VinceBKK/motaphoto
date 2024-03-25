@@ -19,7 +19,7 @@ $photo_category = $args['photo_category']; // Nouveau
     <a href="<?php echo esc_url($photo_info_link); ?>" class="photo-info-icon">
         <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_eye.png" alt="Voir les infos de la photo" />
     </a>
-    <a href="<?php echo esc_url($photo_fullscreen_link); ?>" class="photo-fullscreen-link" data-lightbox="true" data-category="<?php echo esc_attr($photo_category); ?>" data-reference="<?php echo esc_attr($photo_reference); ?>">
+    <a href="<?php echo esc_url($photo_fullscreen_link); ?>" class="photo-fullscreen-link" data-lightbox="true" data-category="<?php echo esc_attr($photo_category); ?>" data-reference="<?php echo esc_attr($photo_reference); ?>" data-filter="<?php echo esc_attr($current_filter); ?>" >
     <img src="<?php echo get_template_directory_uri(); ?>/img/Icon_fullscreen.png" alt="Voir en plein écran" />
     </a>
 
