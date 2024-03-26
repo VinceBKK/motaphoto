@@ -8,9 +8,14 @@ get_header(); ?>
 </section>
 
 <main>
-
+<div class="page-container">
 <!-- Filtres -->
 
+<div class="filters">
+
+<div class="filters-form">
+
+<div class="taxo">
 <?php
 // Affichage taxonomies
 $taxonomy = [
@@ -32,14 +37,19 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
     }
 }
 ?>
+</div>
 
+<div class="filter2">
 <select id="order" class="custom-select taxonomy-select">
-    <option value="">Trier par</option>
+    <option value="">TRIER PAR</option>
     <option value="DESC">Plus récentes</option>
     <option value="ASC">Plus anciennes</option>
 </select>
+</div>
 
+    </div>
 
+</div>
 
 <!-- Conteneur pour le catalogue de photos -->
     <div class="catalogue-section">
@@ -83,6 +93,7 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 </div>
 
     </div>
+</div>
 </main>
 
 <?php

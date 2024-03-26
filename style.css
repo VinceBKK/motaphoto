@@ -27,16 +27,26 @@ body {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   }
 
-  .site__header a {
-    margin-left: 216px;
+  .header_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    padding: 30px 0;
+    margin: 0 auto;
   }
-  
-  .site__header a img {
-    max-height: 14px; /* ou la hauteur que vous souhaitez pour votre logo */
-    width: auto; /* cela gardera les proportions du logo */
-    max-width: 100%; /* empêche le logo de dépasser son conteneur */
+
+  .logo {
+    margin-left: 20px;
   }
-  
+
+  .nav-links-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+  }  
   
   .site__header__menu {
     list-style: none;
@@ -60,6 +70,7 @@ body {
   .site__header__menu li a:hover,
   .site__header__menu li a:focus {
     color: #ff0000; /* Couleur au survol */
+    font-weight: bold;
   }
   
 
@@ -126,15 +137,76 @@ body {
   word-spacing: 40px;
   -webkit-text-stroke: 2px #fff;
   color: transparent;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+.page-container {
+  margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+}
+
+.filters {
+  padding: 30px;
+}
+
+.filters-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.taxo {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.filter2 {
+  width: 25%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filters select {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #B8BBC2;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-family: "PoppinsMedium";
+  font-size: 12px;
+  margin: 0 10px;
+}
+
+/* Mettre en minuscules avec la première lettre en majuscule */
+select option {
+  text-transform: lowercase; /* Tout en minuscules */
+}
+
+select option::first-letter {
+  text-transform: uppercase; /* Première lettre en majuscule */
+}
+
+select option:hover {
+  background-color: #E00000;
+  color: #fff;
 }
 
 /*** Catalogue page accueil ***/
 
 .catalogue-section {
-  max-width: 1200px;
-  width: 100%;
-  position: relative;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .photo-grid {
@@ -142,30 +214,63 @@ body {
   flex-wrap: wrap;
 }
 
+#load_more_container {
+  display: flex;
+  justify-content: center;
+}
+
+#load_more {
+  width: 100%;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 20px 0 40px;
+  padding: 15px 90px;
+  border: 2px solid transparent;
+  background-color: #D8D8D8;
+  cursor: pointer;
+}
+
 /*** Post Photo ***/
 
 /* Conteneur principal pour tout le contenu du post */
 .photo-single-layout {
-  display: flex;
+  /*display: flex;
   flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
-  min-height: calc(100vh - 118px); /* Hauteur de la vue moins le bloc d'interaction */
+  /*min-height: calc(100vh - 118px); /* Hauteur de la vue moins le bloc d'interaction */
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  margin: 0 auto;
 }
 
 /* Conteneur pour les métadonnées et l'image */
 .photo-content {
-  display: flex;
+  /*display: flex; */
   width: 100%; /* Prend toute la largeur */
   height: 843px;
   margin-top: 40px;
+}
+
+.content-body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  margin-bottom: 20px;
 }
 
 /* Conteneur pour les métadonnées et le titre */
 .photo-info-container {
   display: flex;
   flex-direction: column;
-  margin-left: 144px;
-  margin-top: 413px;
+  justify-content: end;
+  align-items: flex-start;
+  /*margin-left: 144px;
+  margin-top: 413px;*/
   width: 50%; /* Prend 50% de la largeur */
+  height: 100%;
+  border-bottom: 2px solid black;
+  margin-right: 1%;
 }
 
 .photo-meta {
@@ -179,7 +284,7 @@ body {
 }
 
 .entry-header {
-  border-bottom: 1px solid;
+  /* border-bottom: 1px solid; */
   margin-right: 10px;
 }
 
@@ -206,6 +311,7 @@ body {
 
 .interaction-left {
   display: flex;
+  align-items: center;
 }
 
 .photo-interaction-container {
@@ -214,7 +320,7 @@ body {
   display: flex;
   justify-content: space-between; /* Répartit le contenu sur les côtés */
   align-items: center; /* Centre les éléments verticalement */
-  padding: 0 20px; /* Ajustez selon votre design */
+  border-bottom: 2px solid black;
 }
 
 /* Styles pour l'image à l'intérieur de .entry-content */
@@ -227,11 +333,11 @@ body {
 
 /* Styles supplémentaires pour le bouton "Contact" */
 .contact-button {
-  background-color: #4E5260; /* Remplacez par la couleur de fond de votre choix */
-  color: #FFFFFF; /* Remplacez par la couleur de texte de votre choix */
+  background-color: #D8D8D8; /* Remplacez par la couleur de fond de votre choix */
+  /* color: #FFFFFF; /* Remplacez par la couleur de texte de votre choix */
   border: none;
-  padding: 10px 20px;
-  margin-left: 438px;
+  margin-left: 80px;
+  padding: 15px 90px;
   cursor: pointer;
   transition: background-color 0.3s ease; /* Transition douce pour le changement de fond */
   font-size: 1rem; /* Ajustez la taille de la police si nécessaire */
@@ -242,22 +348,26 @@ body {
 
 .contact-button:hover {
   background-color: #6C757D; /* Remplacez par la couleur de fond au survol */
+  color: #ffffff;
 }
 
 /* Style pour le texte "Cette photo vous intéresse ?" si vous décidez de le garder */
-.interest-text {
-    margin-right: auto; /* Pour pousser le bouton "Contact" vers la droite */
+/* .interest-text {
+    /* margin-right: auto; /* Pour pousser le bouton "Contact" vers la droite */
     /* Ajoutez d'autres propriétés de style comme la couleur de texte, la police, etc. */
-}
+
 
 /* Styles pour les liens de navigation avec animation */
 /* Styles pour les liens de navigation (flèches) */
 .photo-navigation .nav-link {
+  display: flex;
+  justify-content: space-between;
   text-decoration: none; /* Supprime le soulignement */
-  display: inline-block; /* Changez à block ou inline-block selon votre disposition */
-  width: 81px; /* Largeur souhaitée pour les flèches */
+  /* display: inline-block; /* Changez à block ou inline-block selon votre disposition */
+  /* width: 81px; /* Largeur souhaitée pour les flèches */
+  width: 250%;
   height: 25px; /* Hauteur souhaitée pour les flèches */
-  margin: 0 12.5px; /* Espace entre les flèches, ajustez selon besoin */
+  /* margin: 0 12.5px; /* Espace entre les flèches, ajustez selon besoin */
   cursor: pointer; /* Change le curseur en main pour indiquer la cliquabilité */
 }
 
@@ -284,7 +394,14 @@ body {
 /* Styles pour la miniature au survol avec animation */
 
 .photo-navigation {
+  display: flex;
+  /* justify-content: flex-end; */
+  flex-direction: row;
+  width: 81px;
   position: relative;
+  margin-top: 90px;
+  margin-right: 15px;
+  align-items: flex-end;
 }
 .nav-thumb {
   display: none;
@@ -313,10 +430,21 @@ body {
 
 /* Conteneur général des photos apparentées */
 .related-photos {
-  display: flex;
+  display: block;
+  /* display: flex;
   flex-wrap: wrap;
   justify-content: space-between; /* Espacement entre les photos */
-  margin-top: 20px;
+  /* margin-top: 20px; */
+}
+
+.related-photos h2 {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.photo-suggestion {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 /* Bloc individuel de photo */
@@ -341,7 +469,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.7); /* Fond semi-transparent noir */
@@ -349,8 +477,30 @@ body {
   transition: opacity 0.3s ease; /* Animation en fondu */
 }
 
+.fullscreen {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.photo-fullscreen-link {
+  display: flex;
+  justify-content: flex-end;
+  width: 34px;
+}
+
+.overlay-single {
+  display: flex;
+  justify-content: center;
+}
+
 .overlay-info {
   color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-info-icon img {
+  width: 46px;
 }
 
 .photo-block:hover .photo-overlay {
@@ -360,14 +510,18 @@ body {
 .photo-info-icon,
 .photo-fullscreen-icon {
   color: #fff; /* Couleur des icônes */
-  margin: 0 10px; /* Espacement entre les icônes */
-  font-size: 24px; /* Taille des icônes */
+
   text-decoration: none; /* Supprime le soulignement */
 }
 
 /* Styles supplémentaires pour l'icône œil */
 .photo-info-icon {
-  /* Styles spécifiques à l'icône œil si nécessaire */
+  /* display: flex;
+  justify-content: center; */
+  width: 46px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
 /* Styles supplémentaires pour l'icône plein écran */
@@ -390,7 +544,7 @@ body {
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  margin: 0 50px;
+  margin: 20px 50px;
 }
 
 .lightbox__close {
@@ -399,8 +553,8 @@ body {
   height: 23px;
   border: none;
   background: url(img/close.svg) center center / 100% 100% transparent;
-  top: 100px;
-  right: 20px;
+  top: 35px;
+  right: 30px;
 }
 
 .lightbox__prev {
@@ -459,7 +613,7 @@ body {
 #lightbox-category {
   color: #ffffff;
   position: fixed;
-  right: 15%;
+  right: 5%;
   bottom: 40px;
 }
 
@@ -468,8 +622,94 @@ body {
   position: fixed;
   bottom: 40px;
   right: auto;
-  left: 10%;
+  left: 5%;
 
 }
 
+/* Mobile */
+
+/* Styles pour le bouton de menu hamburger */
+.hamburger-button {
+  display: none; /* Cachez par défaut */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  cursor: pointer;
+}
+
+.hamburger-button span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+}
+
+.close-button {
+  display: none; /* cachez par défaut */
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 30px;
+  height: 30px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 11; /* Assurez-vous que la croix est au-dessus du menu */
+}
+
+.close-button span {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background-color: #000;
+  position: absolute;
+}
+
+.close-button span:first-child {
+  transform: rotate(45deg);
+}
+
+.close-button span:last-child {
+  transform: rotate(-45deg);
+}
+
+/* Affichez le bouton de fermeture lorsque le menu est ouvert */
+.menu-open .close-button {
+  display: flex;
+}
+
+/* Media query pour les écrans jusqu'à 600px de large */
+@media screen and (max-width: 600px) {
+  .hamburger-button {
+    display: flex; /* Affichez le bouton hamburger sur les petits écrans */
+  }
+
+  .nav-links-container {
+    position: fixed;
+    right: -100%; /* Cacher le menu hors de l'écran */
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: right 0.3s;
+  }
+
+  .site__header__menu {
+    flex-direction: column;
+  }
+
+  .site__header__menu li {
+    margin: 20px 0; /* Plus d'espace entre les liens sur mobile */
+  }
+
+  .site__header {
+    height: auto; /* Hauteur auto pour gérer la taille variable du menu hamburger */
+    padding-top: 20px; /* Ajoutez de l'espace au-dessus du logo */
+  }
+}
 

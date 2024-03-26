@@ -6,8 +6,7 @@
     width: 100%; /* Pleine largeur */
     height: 100%; /* Pleine hauteur */
     overflow: auto; /* Si le contenu est plus grand que la modale, cela permet de scroller */
-    background-color: rgb(0,0,0); /* Couleur de fond avec un peu de transparence */
-    background-color: rgba(0,0,0,0.4); /* Noir avec opacité */
+    background-color: rgba(0,0,0,0.8); /* Noir avec opacité */
     z-index: 1000; /* S'assure que la modale est au-dessus des autres éléments */
 }
 
@@ -15,17 +14,22 @@
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% du haut et centré horizontalement */
-    border: 1px solid #888;
+    border: 5px solid black;
     width: 597px; /* Largeur spécifiée */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1001; /* S'assure que le contenu est au-dessus du fond de la modale */
+    max-width: 512px;
+    margin-top: 5px;
+    height: auto;
+    overflow: hidden;
+    padding: 0 40px;
 }
 
 .modal-header {
-    width: 100%; /* L'en-tête prend toute la largeur de la modale */
+    width: 117%; /* L'en-tête prend toute la largeur de la modale */
     overflow: hidden; /* Empêche l'image de déborder */
 }
 
@@ -48,5 +52,44 @@
 .close:focus {
     color: black;
     text-decoration: none;
+    cursor: pointer;
+}
+
+.wpcf7 {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.wpcf7 label {
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.wpcf7-form-control {
+    border-radius: 8px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.wpcf7-submit {
+    border-radius: 0;
+    font-family: "space_monoregular";
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 18px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #D8D8D8;
+    color: #000000;
+    border: none;
+    margin-top: 10px;
     cursor: pointer;
 }

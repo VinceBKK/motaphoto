@@ -15,7 +15,7 @@
 <!-- Conteneur pour métadonnées et image -->
 
 <div class="photo-content">
-
+<div class="content-body">
     <div class="photo-info-container">
         <header class="entry-header">
             <?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -51,7 +51,7 @@
             </div>
         </div>
     <?php endif; ?>
-
+    </div> <!-- Fin du conteneur content body -->
 	</div> <!-- Fin du conteneur pour métadonnées et image -->
 
 	<!-- Début du nouveau bloc pour les interactions -->
@@ -72,6 +72,9 @@
 
 <div class="related-photos">
     <h2>VOUS AIMEREZ AUSSI</h2>
+    <div class="photo-suggestion">
+    
+    
     <?php
 // WP_Query pour récupérer des photos apparentées
 $related_category = wp_get_post_terms($post->ID, 'categorie', array('fields' => 'ids'));
@@ -117,6 +120,8 @@ if($related_posts->have_posts()) :
 endif;
 
 ?>
-</div>
 
+
+</div>
+</div>
 </article><!-- #post-<?php the_ID(); ?> -->
