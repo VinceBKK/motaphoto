@@ -195,11 +195,19 @@ body {
 
 /* Mettre en minuscules avec la première lettre en majuscule */
 select option {
-  text-transform: lowercase; /* Tout en minuscules */
+  /* text-transform: capitalize !important; /* Tout en minuscules */
+  background-color: red;
+}
+
+select option:hover {
+  
+  background-color: green !important;
+  z-index: 1000;
 }
 
 select option::first-letter {
   text-transform: uppercase; /* Première lettre en majuscule */
+  font-size: 1.5rem;
 }
 
 /*select option:hover {
@@ -207,10 +215,6 @@ select option::first-letter {
   color: #fff;
 } */
 
-.custom-option:hover {
-  background-color: red !important;
-  border: solid 1px red;
-}
 
 /*** Catalogue page accueil ***/
 
@@ -503,12 +507,14 @@ select option::first-letter {
 .overlay-single {
   display: flex;
   justify-content: center;
+  height: 87%;
 }
 
 .overlay-info {
   color: white;
   display: flex;
   justify-content: space-between;
+  margin: 0 10px;
 }
 
 .photo-info-icon img {
@@ -668,6 +674,8 @@ select option::first-letter {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border: none;
+  background-color: #ffffff;
   z-index: 1010; /* Assurez-vous que la croix est au-dessus du menu */
 }
 
@@ -704,6 +712,8 @@ select option::first-letter {
 @media screen and (max-width: 600px) {
   .hamburger-button {
     display: flex; /* Affichez le bouton hamburger sur les petits écrans */
+    border: none;
+    background-color: #ffffff;
   }
 
   .nav-links-container {
@@ -722,6 +732,7 @@ select option::first-letter {
 
   .site__header__menu {
     flex-direction: column;
+    align-items: center;
   }
 
   .site__header__menu li {
@@ -782,6 +793,11 @@ select option::first-letter {
   .photo-block {
     width: 100%; /* Ajuster la largeur des blocs de photos sur les petits écrans */
     margin: 3%;
+    height: 278px;
+  }
+
+  .overlay-single {
+    height: 75%;
   }
 
   .filters-form {
@@ -816,6 +832,10 @@ select option::first-letter {
     z-index: 1020;
   }
 
+  .wpcf7-form {
+    width: 53%;
+  }
+
 /* Footer Mobile */
 
 @media (max-width: 767px) {
@@ -840,4 +860,100 @@ select option::first-letter {
     margin-left: 0; /* Annulez la marge gauche ajoutée sur le desktop */
     /* margin-top: 20px; /* Ajoutez un espace au-dessus du texte de droit d'auteur */
   }
+}
+
+/* Single Post Photo Media query pour les écrans mobiles */
+@media screen and (max-width: 600px) {
+  
+  .content-body {
+    flex-direction: column; /* Empile les éléments à la verticale */
+  }
+
+  /* Assure que l'image prend toute la largeur et est affichée en premier */
+  .entry-content {
+    order: -1; /* Place l'image avant les métadonnées */
+    /* width: 100%; /* Image prend toute la largeur */
+    /* margin-bottom: 20px; /* Espace après l'image */
+  }
+  
+  /* Conteneur pour le titre et les métadonnées */
+  .photo-info-container {
+    order: 1; /* Assure que les métadonnées suivent l'image */
+    width: 100%; /* Prend toute la largeur sur les écrans mobiles */
+    margin-left: 0; /* Annulez les marges de gauche spécifiques au desktop */
+    /* margin-top: 20px; /* Espace au-dessus du titre */
+    /* border-bottom: none; /* Supprimez la bordure si elle n'est pas nécessaire sur mobile */
+  }
+
+  .entry-header {
+    margin-left: 56px;
+  }
+
+  .photo-info-container .entry-title {
+    font-size: 46px;
+  }
+
+  .photo-meta {
+    /* align-items: center; /* Centre les métadonnées si elles sont dans un flex container */
+    /* text-align: center; /* Centre le texte des métadonnées */
+    margin: 20px 0; /* Ajoute un peu d'espace autour des métadonnées */
+  }
+
+  .photo-content {
+    height: auto; /* Hauteur automatique pour s'adapter au contenu */
+    margin-top: 0; /* Annulez les marges spécifiques au desktop */
+  }
+
+  .content-body {
+    flex-direction: column; /* Empile les éléments à la verticale */
+  }
+
+  .photo-image-container,
+  .entry-content {
+    width: 100%; /* Assure que l'image prend toute la largeur */
+  }
+
+  .wp-block-image {
+    width: 265px;
+    height: 397px;
+    margin: 20px 56px;
+  }
+
+  .wp-block-image img {
+    width: 265px;
+    height: 397px !important;
+  }
+
+  .photo-interaction-container {
+    flex-direction: column;
+    height: 135px;
+    margin-bottom: 35px;
+  }
+
+  .interaction-left {
+    flex-wrap: wrap;
+  }
+
+  /* Cache la partie navigation des photos après "Cette photo vous intéresse ?" */
+  .photo-navigation {
+     display: none;
+  }
+
+  /* Ajustements pour le bouton "Contact" */
+  .contact-button {
+    padding: 10px; /* Ajustez le padding pour mobile */
+    margin-left: 0; /* Centre le bouton sur mobile */
+    width: 100%; /* Permet au bouton de prendre toute la largeur */
+  }
+
+  /* Assurez-vous que le texte "Cette photo vous intéresse ?" est visible et bien positionné */
+  .interest-text {
+    text-align: center; /* Centre le texte sur mobile */
+    width: 100%; /* Assure que le texte prend toute la largeur */
+    margin: 20px 0; /* Ajoute un peu d'espace autour du texte */
+  }
+}
+
+.related-photos h2{
+  text-align: center;
 }
