@@ -29,9 +29,9 @@ foreach ($taxonomy as $taxonomy_slug => $label) {
 
         echo "<select id='$taxonomy_slug' class='custom-select taxonomy-select'>";
 
-        echo "<option value=''>$label</option>";
+        echo "<option class='custom-option' value=''>$label</option>";
         foreach ($terms as $term) {
-            echo "<option value='$term->slug'>$term->name</option>";
+            echo "<option class='custom-option' value='$term->slug'>$term->name</option>";
         }
         echo "</select>";
     }

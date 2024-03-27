@@ -44,23 +44,32 @@
   </nav>
   </div>
 
+
+  
 <script>
+
+
+
   // JavaScript pour le menu hamburger
   document.addEventListener('DOMContentLoaded', function() {
   var menuButton = document.querySelector('.hamburger-button');
   var closeButton = document.querySelector('.close-button');
   var navContainer = document.querySelector('.nav-links-container');
+  var body = document.body;
 
   menuButton.addEventListener('click', function() {
     navContainer.style.right = '0px';
     closeButton.style.display = 'flex';
+    body.classList.add('body-no-scroll'); // Empêche le défilement
   });
 
   closeButton.addEventListener('click', function() {
     navContainer.style.right = '-100%';
     this.style.display = 'none';
+    body.classList.remove('body-no-scroll'); // Réactive le défilement
   });
 });
+
 
 </script>
 
