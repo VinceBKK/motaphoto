@@ -193,27 +193,33 @@ body {
   margin: 0 10px;
 }
 
-/* Mettre en minuscules avec la première lettre en majuscule */
-select option {
-  /* text-transform: capitalize !important; /* Tout en minuscules */
-  background-color: red;
+/* CSS pour changer la couleur de fond et la couleur du texte au survol des options */
+/* Remarque : cette méthode peut ne pas fonctionner correctement sur tous les navigateurs */
+.custom-select.taxonomy-select option:hover {
+  background-color: #E00000 !important; /* Couleur de fond au survol */
+  color: #fff !important; /* Couleur du texte au survol */
 }
 
-select option:hover {
-  
-  background-color: green !important;
-  z-index: 1000;
+#categorie option:hover,
+#format option:hover {
+  background-color: #E00000 !important;
+  color: #fff !important;
 }
 
-select option::first-letter {
-  text-transform: uppercase; /* Première lettre en majuscule */
-  font-size: 1.5rem;
+.filters select option:hover {
+  background-color: #E00000 !important; /* Couleur de fond au survol */
+  color: #fff !important; /* Couleur du texte au survol */
 }
 
 /*select option:hover {
   background-color: #E00000;
   color: #fff;
 } */
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #E00000 !important; /* Couleur de fond au survol */
+  color: #fff !important; /* Couleur du texte au survol */
+}
 
 
 /*** Catalogue page accueil ***/
@@ -803,12 +809,13 @@ select option::first-letter {
   .filters-form {
     flex-direction: column;
     align-items: flex-start;
+    gap: 5px;
   }
 
   .taxo {
     width: 100%;
     flex-direction: column;
-    gap: 0;
+    gap: 5px;
     margin-bottom: 0;
   }
 

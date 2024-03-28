@@ -346,3 +346,16 @@ function motaphoto_enqueue_lightbox_scripts() {
     wp_enqueue_script('motaphoto-lightbox', get_template_directory_uri() . '/motaphoto-lightbox.js', array('jquery'), '1.0.0', true);
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_lightbox_scripts');
+
+// Select2 couleurs filtres 
+function charger_select2() {
+    // Ajoute la feuille de style CSS de Select2
+    wp_enqueue_style('select2-css', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css');
+
+    // Ajoute le script JavaScript de Select2
+    wp_enqueue_script('select2-js', 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js', array('jquery'), '', true);
+
+    // Ajoute un script pour initialiser Select2 sur vos éléments <select>
+    wp_add_inline_script('select2-js', 'jQuery(document).ready(function($) { $(".custom-select").select2(); });');
+}
+add_action('wp_enqueue_scripts', 'charger_select2');
