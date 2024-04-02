@@ -833,7 +833,7 @@ body {
     width: 100%;
     margin: 10px 0; /* Ajoutez de l'espacement vertical entre les sélecteurs */
   }
-}
+
 
   #contactModal {
     z-index: 1020;
@@ -842,6 +842,8 @@ body {
   .wpcf7-form {
     width: 53%;
   }
+
+}
 
 /* Footer Mobile */
 
