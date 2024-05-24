@@ -359,3 +359,28 @@ function charger_select2() {
     wp_add_inline_script('select2-js', 'jQuery(document).ready(function($) { $(".custom-select").select2(); });');
 }
 add_action('wp_enqueue_scripts', 'charger_select2');
+
+
+// Hero Header carrousel
+
+function enqueue_custom_scripts_and_styles() {
+    // Enregistrer le CSS de Swiper
+    wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), null);
+
+    // Enregistrer votre CSS personnalisé
+    wp_enqueue_style('custom-carrousel-css', get_template_directory_uri() . '/css/carrousel-style.css', array(), null);
+
+    // Enregistrer le JS de Swiper
+    wp_enqueue_script('swiper-js', 'https://unpkg.com/swiper/swiper-bundle.min.js', array(), null, true);
+
+    // Enregistrer le JS de tsParticles
+    wp_enqueue_script('tsparticles-js', 'https://cdn.jsdelivr.net/npm/tsparticles@1.26.0/dist/tsparticles.min.js', array(), null, true);
+
+    // Enregistrer le JS de Ionicons
+    wp_enqueue_script('ionicons-esm-js', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js', array(), null, true);
+    wp_enqueue_script('ionicons-js', 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js', array(), null, true);
+
+    // Enregistrer votre JS personnalisé
+    wp_enqueue_script('custom-carrousel-js', get_template_directory_uri() . '/js/carrousel-script.js', array('swiper-js', 'tsparticles-js'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_custom_scripts_and_styles');
