@@ -90,6 +90,7 @@ function motaphoto_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'motaphoto_enqueue_styles');
 
+// Hero header motaphoto
 function motaphoto_get_random_image_url() {
     $args = array(
         'post_type'      => 'attachment',
@@ -204,11 +205,11 @@ function filter_photos_function(){
     }
 
     // Vérifiez si un ordre de tri a été passé et mettez à jour les arguments de requête
-if (!empty($filter['order']) && in_array($filter['order'], array('ASC', 'DESC'))) {
-    $args['order'] = $filter['order'];
+// if (!empty($filter['order']) && in_array($filter['order'], array('ASC', 'DESC'))) {
+//    $args['order'] = $filter['order'];
     // Lorsque vous triez par date, utilisez 'date' pour l'orderby
-    $args['orderby'] = 'date';
-}
+//    $args['orderby'] = 'date';
+// }
 
     
     $query = new WP_Query($args);
@@ -360,9 +361,7 @@ function charger_select2() {
 }
 add_action('wp_enqueue_scripts', 'charger_select2');
 
-
-// Hero Header carrousel
-
+// Carrousel Hero Header
 function enqueue_custom_scripts_and_styles() {
     // Enregistrer le CSS de Swiper
     wp_enqueue_style('swiper-css', 'https://unpkg.com/swiper/swiper-bundle.min.css', array(), null);
@@ -384,3 +383,4 @@ function enqueue_custom_scripts_and_styles() {
     wp_enqueue_script('custom-carrousel-js', get_template_directory_uri() . '/js/carrousel-script.js', array('swiper-js', 'tsparticles-js'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_custom_scripts_and_styles');
+

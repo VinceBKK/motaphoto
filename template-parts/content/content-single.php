@@ -35,7 +35,7 @@
                     ?>
                 </div>
                 <div class="post-type">TYPE : <?php the_field('type'); ?></div>
-                <div class="post-year">ANNÉE : <?php echo get_the_date( 'Y' ); ?></div>
+            <!--    <div class="post-year">ANNÉE : <?php echo get_the_date( 'Y' ); ?></div> -->
             </div>
         </header>
     </div>
@@ -57,8 +57,8 @@
 	<!-- Début du nouveau bloc pour les interactions -->
 <div class="photo-interaction-container">
     <div class="interaction-left">
-        <p class="interest-text">Cette photo vous intéresse ?</p>
-        <button id="openContactModal" class="contact-button">Contact</button>
+        <p class="interest-text">Cette excursion vous intéresse ?</p>
+        <button id="openContactModal" class="contact-button">Réserver</button>
     </div>
 
     <div class="photo-navigation">

@@ -1,4 +1,3 @@
-console.log('tsParticles:', typeof tsParticles);
 document.addEventListener('DOMContentLoaded', function() {
     var swiper = new Swiper('.swiper', {
         effect: 'cube',
@@ -11,18 +10,16 @@ document.addEventListener('DOMContentLoaded', function() {
             shadowOffset: 10,
             shadowScale: 0.94,
         },
-        
         autoplay: {
             delay: 2600,
             pauseOnMouseEnter: true,
         },
-        
     });
 
     tsParticles.load('tsparticles', {
         fpsLimit: 60,
         backgroundMode: {
-            enable: true,
+            enable: false,
             zIndex: -1,
         },
         particles: {
@@ -132,4 +129,3 @@ document.addEventListener('DOMContentLoaded', function() {
         detectRetina: true,
     });
 });
-

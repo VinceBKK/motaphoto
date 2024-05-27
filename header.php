@@ -14,9 +14,11 @@
 <header class="site__header">
   <div class="header_container">
     <div class="logo">
-    <a href="<?php echo home_url( '/' ); ?>">
-      <img src="<?php echo get_template_directory_uri(); ?>/img/logo.svg" alt="Logo">
+    <a href="<?php echo home_url( '/' ); ?>" class="logo-link">
+      <img src="<?php echo get_template_directory_uri(); ?>/img/logo-krabi-dome.webp" alt="Logo Krabi Dôme agence francophone">
+      <span>KRABI DOME</span>
     </a>
+    
     </div>
 
     <button class="hamburger-button" aria-label="Toggle navigation">
